@@ -1,0 +1,377 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Конкурс: Самый долгий сон — Регистрация</title>
+    <style>
+        /* ---------------------------------------------------
+           ОЧЕНЬ ПРОСТОЕ ОФОРМЛЕНИЕ 
+           Никаких сложных анимаций, только базовые стили.
+           Полностью без JS/TS.
+        --------------------------------------------------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #b0c4de 0%, #7d9eb5 100%);
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Главная карточка формы */
+        .contest-card {
+            max-width: 540px;
+            width: 100%;
+            background: #fffef7;
+            border-radius: 48px 28px 48px 28px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2), 0 5px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        /* "Сонная" шапка */
+        .sleep-header {
+            background: #2c3e4e;
+            padding: 28px 20px 20px 20px;
+            text-align: center;
+            color: #f9eec1;
+            border-bottom: 6px solid #f3b33d;
+        }
+
+        .sleep-header h1 {
+            font-size: 2rem;
+            letter-spacing: 1px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            word-break: keep-all;
+        }
+
+        .sleep-header h1 span {
+            display: inline-block;
+            font-size: 2.1rem;
+        }
+
+        .sleep-header p {
+            font-size: 1rem;
+            background: #1f2e3a;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 60px;
+            margin-top: 12px;
+            font-style: italic;
+        }
+
+        /* основное тело формы */
+        .form-body {
+            padding: 30px 28px 35px;
+        }
+
+        /* Поля ввода и группы */
+        .field-group {
+            margin-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #1e2f3a;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* маленькие иконки-эмодзи (чисто декор) */
+        .label-icon {
+            font-size: 1.3rem;
+        }
+
+        input, select {
+            padding: 12px 16px;
+            font-size: 1rem;
+            border: 2px solid #d4cfb2;
+            border-radius: 40px;
+            background: #ffffff;
+            transition: 0.2s;
+            font-family: inherit;
+            outline: none;
+            color: #1f2f37;
+        }
+
+        input:focus, select:focus {
+            border-color: #f3b33d;
+            box-shadow: 0 0 0 3px rgba(243, 179, 61, 0.2);
+        }
+
+        /* подсказки под полями (очень простые) */
+        .hint {
+            font-size: 0.7rem;
+            color: #6f6b4c;
+            margin-top: 5px;
+            margin-left: 12px;
+        }
+
+        /* радиокнопки и чекбокс в красивом виде (без сложностей) */
+        .radio-group, .checkbox-group {
+            background: #fef9e6;
+            padding: 12px 18px;
+            border-radius: 48px;
+            margin-top: 5px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .radio-option label {
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #f3b33d;
+            margin: 0;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+
+        /* кнопочная панель */
+        .button-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            justify-content: space-between;
+            margin-top: 25px;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            background: #e9e3ce;
+            color: #2c3e4e;
+            transition: all 0.15s;
+            font-family: inherit;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: #f3b33d;
+            color: #2c2b26;
+            box-shadow: 0 4px 0 #b4621a;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #b4621a;
+        }
+
+        .btn-secondary {
+            background: #cbd5cf;
+            color: #1f2e3a;
+            border: 1px solid #b3aa86;
+        }
+
+        .btn-secondary:active {
+            background: #b7c0b5;
+        }
+
+        .btn:hover {
+            filter: brightness(0.97);
+        }
+
+        /* нотификация (сообщение без JS = просто визуальный блок)
+           Показывает что форма может быть отправлена, но реальной отправки нет.
+           Это статическое примечание.
+        */
+        .info-message {
+            background: #eef3e2;
+            border-left: 8px solid #f3b33d;
+            padding: 12px 18px;
+            margin-top: 26px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #3f4a3b;
+            text-align: center;
+        }
+
+        footer {
+            background: #f5f0df;
+            padding: 12px;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #5c634f;
+            border-top: 1px solid #e0d9c0;
+        }
+
+        hr {
+            margin: 12px 0;
+            border: 0;
+            height: 1px;
+            background: #e2dbc2;
+        }
+
+        @media (max-width: 500px) {
+            .form-body {
+                padding: 20px;
+            }
+            .btn {
+                padding: 10px 22px;
+                flex: 1;
+                text-align: center;
+            }
+            .button-panel {
+                gap: 12px;
+            }
+            .sleep-header h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="contest-card">
+    <div class="sleep-header">
+        <h1>
+            <span>💤</span> СОННЫЙ МАРАФОН <span>😴</span>
+        </h1>
+        <p>🏆 Конкурс на самый долгий сон 🏆</p>
+    </div>
+
+    <div class="form-body">
+        <!-- форма без атрибута action → отправка на ту же страницу (не будет реального скрипта)
+             но "method=get" позволяет просто перезагрузить страницу с параметрами в URL.
+             Поскольку JS нет — это чисто демонстрационная регистрация.
+             При нажатии "Отправить" браузер просто перезагрузит страницу с данными (видно в адресной строке).
+             Можно также ничего не писать -> перезагрузка.
+             Добавим novalidate (чтобы браузер не требовал обязательных полей, но HTML5 сам подскажет).
+          -->
+        <form action="#" method="get">
+            <!-- ФИО участника -->
+            <div class="field-group">
+                <label><span class="label-icon">🧑‍🌾</span> Ваше имя (или сонный псевдоним)</label>
+                <input type="text" name="fullname" placeholder="например: Сплюнчик Зевсович" required>
+                <div class="hint">⭐ Укажите имя, под которым войдёте в историю сна</div>
+            </div>
+
+            <!-- Возраст (только цифры) -->
+            <div class="field-group">
+                <label><span class="label-icon">📅</span> Ваш возраст (лет)</label>
+                <input type="number" name="age" placeholder="от 1 до 120" min="1" max="120" step="1" required>
+                <div class="hint">🐢 Сон не имеет возраста, но для статистики</div>
+            </div>
+
+            <!-- Рекорд сна -->
+            <div class="field-group">
+                <label><span class="label-icon">⏱️</span> Ваш личный рекорд сна (часов)</label>
+                <input type="number" name="sleep_hours" placeholder="например: 14.5" step="0.5" min="0" max="48" required>
+                <div class="hint">🌙 Максимальное количество часов непрерывного сна за сутки</div>
+            </div>
+
+            <!-- Любимая поза для сна (радиокнопки) -->
+            <div class="field-group">
+                <label><span class="label-icon">🛌</span> Любимая поза для сна</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="pose1" name="sleep_pose" value="на боку" checked>
+                        <label for="pose1">😴 На боку (поза эмбриона)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="pose2" name="sleep_pose" value="на спине">
+                        <label for="pose2">🌠 На спине (звезда)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="pose3" name="sleep_pose" value="на животе">
+                        <label for="pose3">🐙 На животе (обнимая подушку)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="pose4" name="sleep_pose" value="калачиком">
+                        <label for="pose4">🦥 Калачиком с плюшевым другом</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Секретный ингредиент (выпадающий список) -->
+            <div class="field-group">
+                <label><span class="label-icon">🍵</span> Что помогает вам спать дольше всех?</label>
+                <select name="sleep_aid" required>
+                    <option value="" disabled selected>— выберите вариант —</option>
+                    <option value="тишина">🔇 Абсолютная тишина</option>
+                    <option value="беруши">👂 Беруши + маска для сна</option>
+                    <option value="чай">🍃 Ромашковый чай с мёдом</option>
+                    <option value="дождь">🌧️ Звуки дождя</option>
+                    <option value="кот">🐈 Кот, который мурчит рядом</option>
+                    <option value="ничего">😎 Мне ничего не нужно, я профи</option>
+                </select>
+                <div class="hint">Выберите супер-способность спать долго</div>
+            </div>
+
+            <!-- Согласие на участие (честный чекбокс) -->
+            <div class="field-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="agree_rules" name="agree" value="yes" required>
+                    <label for="agree_rules">✅ Я подтверждаю, что готов(а) соревноваться в долгом сне и не буду использовать будильники</label>
+                </div>
+                <div class="hint">📜 Сонный кодекс: честность превыше всего!</div>
+            </div>
+
+            <!-- Кнопки отправки и сброса -->
+            <div class="button-panel">
+                <button type="reset" class="btn btn-secondary">✨ Очистить всё</button>
+                <button type="submit" class="btn btn-primary">💤 Зарегистрироваться 💤</button>
+            </div>
+
+            <!-- Простое пояснение (без JS): после нажатия на отправить данные появятся в адресной строке GET параметры,
+                 страница обновится, но мы видим что форма отправлена.  Никакого бэкенда, только простая HTML структура.
+                 Для "демо-регистрации" это идеально.
+            -->
+            <div class="info-message">
+                🛌 <strong>Правила конкурса:</strong> участник с самым большим временем непрерывного сна получает главный приз — подушку-облако и годовой запас какао. 
+                После отправки формы вы увидите параметры в адресной строке — это ваша виртуальная регистрация. <br>
+                (⏰ Регистрация вымышленная, но атмосфера максимально сонная 🌙)
+            </div>
+        </form>
+    </div>
+    <footer>
+        🧸 Оргкомитет "Сонный лев" | 0% JS, только HTML & CSS | Присоединяйтесь к марафону сладких снов 🧸
+    </footer>
+</div>
+</body>
+</html>
+```
